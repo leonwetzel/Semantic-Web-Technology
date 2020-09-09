@@ -1,0 +1,22 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[McGee(2020)]{mcgee_2020}
+Luke McGee.
+\newblock Boris johnson's government is threatening to breach international
+  law. it could backfire spectacularly, Sep 2020.
+\newblock URL
+  \url{https://edition.cnn.com/2020/09/09/uk/boris-johnson-rule-of-law-brexit-intl-gbr/}.
+
+\bibitem[McKeever(2020)]{mckeever_2020}
+Amy McKeever.
+\newblock Dozens of covid-19 vaccines are in development. here are the ones to
+  follow., Sep 2020.
+\newblock URL
+  \url{https://www.nationalgeographic.com/science/health-and-human-body/human-diseases/coronavirus-vaccine-tracker-how-they-work-latest-developments-cvd/}.
+
+\end{thebibliography}
