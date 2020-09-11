@@ -94,6 +94,34 @@ We can see that - next to annotating the corpus - TextRazor splits its output pe
 \label{table:doc1_tr}
 \end{table}
 
+\begin{table}[h!]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{lllll}
+			\textbf{Entity}	& \textbf{Observed entity?} & \textbf{Real entity?} & \textbf{Normalized entity} \\ \hline
+			150	& Yes & No & 150 \\
+			coronavirus vaccines	& Yes & Yes & Coronavirus vaccine \\
+			world & No & Yes & N.A.\\
+			crisis & No & Yes & N.A.\\
+			U.S. & Yes & No & United States\\
+			U.S. government & No & Yes & N.A.\\
+			Operation Warp Speed & Yes & Yes & Operation Warp Speed\\
+			\$10 billion & Yes & No & 10000000000\\
+			300 million & Yes & No & 300000000\\
+			2021 & Yes & Yes & 2021\\
+			The World Health Organization & Yes & Yes & World Health Organization\\
+			vaccine & Yes & Yes & Vaccine\\
+			eye & Yes & Yes & Eye\\
+			two billion & Yes & No & 2000000000\\
+			immune system & Yes & Yes & Immune system\\
+			infection & Yes & Yes & Infection\\
+			health & Yes & Yes & Health
+		\end{tabular}%
+	}
+	\caption{Performance report of TextRazor analyzing the \citet{mckeever_2020} sample.}
+	\label{table:doc1_tr}
+\end{table}
+
 We can use the results from table \ref{table:doc1_tr} to calculate precision and recall.
 
 precision: 0.7273
@@ -103,10 +131,10 @@ recall: 1
 
 \subsection{OpenTapioca}
 
-\begin{table}[h]
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{llll}
-	Corpus	& Model & Precision & Recall \\ \hline
+	\textbf{Corpus}	& \textbf{Model} & \textbf{Precision} & \textbf{Recall} \\ \hline
 	\citet{mcgee_2020}	& TextRazor & 0.7273 & 1.0  \\
 	\citet{mcgee_2020}	& OpenTapioca &  &   \\
 	\citet{mckeever_2020}	& TextRazor &  &   \\
