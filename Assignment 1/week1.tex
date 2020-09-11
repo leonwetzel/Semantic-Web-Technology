@@ -10,6 +10,7 @@
 \usepackage{dirtytalk}
 
 \usepackage{graphicx}
+\usepackage{multicol}
 
 %opening
 \title{Semantic Web Technology -- Assignment 1}
@@ -46,7 +47,18 @@ A similar observation counts for \citet{mckeever_2020}: we can already spot a nu
 
 \section{Using and evaluating the models}
 
-Our way of working comprises of manually entering the samples from \citet{mcgee_2020} and \citet{mckeever_2020} in both TextRazor and OpenTapioca. We can then compare the output from both systems. We measure model performances by taking a look at precision and recall, which take as input observed entities and real entities. Observed entities are entities that have been detected by a system, real entities are entities that are real-world entities. 
+Our way of working comprises of manually entering the samples from \citet{mcgee_2020} and \citet{mckeever_2020} in both TextRazor and OpenTapioca. We can then compare the output from both systems. We measure model performances by taking a look at precision (equation \ref{eq:precision}) and recall (equation \ref{eq:recall}), which take as input observed entities and real entities. Observed entities are entities that have been detected by a system, real entities are entities that are real-world entities. 
+
+\begin{multicols}{2}
+	\begin{equation}
+	precision = \frac{TP}{TP + FP}
+	\label{eq:precision}
+	\end{equation}\break
+	\begin{equation}
+	recall = \frac{TP}{TP + FN}
+	\label{eq:recall}
+	\end{equation}
+\end{multicols}
 
 \subsection{TextRazor}
 
@@ -73,7 +85,7 @@ We can see that - next to annotating the corpus - TextRazor splits its output pe
 		international treaty & Yes & No & Treaty\\
 		Withdrawal agreement & Yes & No & Brexit withdrawal agreement\\
 		the UK to leave the EU & Yes & No & Brexit\\
-		January & Yes & No & 2021-01-01T00:00:00.000+00:00\\
+		January & Yes & Yes & 2021-01-01T00:00:00.000+00:00\\
 		government minister & Yes & Yes & Minister (government)\\
 		House of Commons & Yes & Yes & House of Commons
 	\end{tabular}%
@@ -84,7 +96,25 @@ We can see that - next to annotating the corpus - TextRazor splits its output pe
 
 We can use the results from table \ref{table:doc1_tr} to calculate precision and recall.
 
+precision: 0.7273
+
+recall: 1
+
+
 \subsection{OpenTapioca}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{llll}
+	Corpus	& Model & Precision & Recall \\ \hline
+	\citet{mcgee_2020}	& TextRazor & 0.7273 & 1.0  \\
+	\citet{mcgee_2020}	& OpenTapioca &  &   \\
+	\citet{mckeever_2020}	& TextRazor &  &   \\
+	\citet{mckeever_2020}	& OpenTapioca &  &   \\
+	\end{tabular}
+	\caption{Test results for TextRazor and OpenTapioca for the corpora}
+	\label{tab:doc1_tr}
+\end{table}
 
 asdsad
 
