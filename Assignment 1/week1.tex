@@ -11,6 +11,7 @@
 
 \usepackage{graphicx}
 \usepackage{multicol}
+\usepackage{float}
 
 %opening
 \title{Semantic Web Technology -- Assignment 1}
@@ -62,36 +63,93 @@ Our way of working comprises of manually entering the samples from \citet{mcgee_
 
 \subsection{TextRazor}
 
-We start our journey with TextRazor. We head to the web interface by visiting \url{www.textrazor.com/demo}. A demonstration sample has already been given, but we will use our own corpora instead. We enter our sample from \citet{mcgee_2020} and TextRazor returns us the annotations as shown in figure \ref{fig:doc1tr}.
+We start our journey with TextRazor. We head to the web interface by visiting \url{www.textrazor.com/demo}. A demonstration sample has already been given, but we will use our own corpora instead. We enter our samples from \citet{mcgee_2020} and \citet{mckeever_2020} and TextRazor returns us the annotations as shown in figures \ref{fig:doc1tr} and \ref{fig:doc2tr}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\label{fig:doc1tr}
-	\includegraphics[width=\textwidth]{doc1_textrazor.png}
+	\centering
+	\includegraphics[width=0.9\textwidth]{doc1_textrazor.png}
 	\caption{Generated annotations by TextRazor for \citet{mcgee_2020}.}
 \end{figure}
 
-We can see that - next to annotating the corpus - TextRazor splits its output per sentence, presumably for sake of readability. Our first observation is that TextRazor has performed  decently in underlining what relevant named entities are. We displayed the results of the performance of TextRazor in table \ref{table:doc1_tr}. We can observe that TextRazor has found all real entities in the sample of \citet{mcgee_2020}, but that it was rather generous in observing entities as well.
+We can see that - next to annotating the corpus - TextRazor splits its output per sentence, presumably for sake of readability. Our first observation is that TextRazor has performed  decently in underlining what relevant named entities are. We displayed the results of the performance of TextRazor in tables \ref{table:rep_doc1_tr} and \ref{table:rep_doc2_tr}. We can observe that TextRazor has found all real entities in the sample of \citet{mcgee_2020}, but that it was rather generous in observing entities as well.
+
+\begin{figure}[H]
+	\label{fig:doc2tr}
+	\centering
+	\includegraphics[width=0.9\textwidth]{doc2_textrazor.png}
+	\caption{Generated annotations by TextRazor for \citet{mckeever_2020}.}
+\end{figure}
+
+
+\subsection{OpenTapioca}
+
+The web interface of OpenTapioca (\url{www.opentapioca.org}) has a very minimalistic and simple design when compared to TextRazor, When it comes to functionality, they are nearly identical. Once again, a demonstration sample is already provided and we use our own samples instead.
+
+\begin{figure}[H]
+	\label{fig:doc1ot}
+	\centering
+	\includegraphics[width=0.7\textwidth]{doc1_ot.png}
+	\caption{Generated annotations by OpenTapioca for \citet{mcgee_2020}.}
+\end{figure}
+
+\begin{figure}[H]
+	\label{fig:doc2ot}
+	\centering
+	\includegraphics[width=0.7\textwidth]{doc2_ot.png}
+	\caption{Generated annotations by OpenTapioca for \citet{mckeever_2020}.}
+\end{figure}
+
+The output (see figures \ref{fig:doc1ot} and \ref{fig:doc2ot}) is displayed on the same page, and named entities are \textit{highlighted} by using brackets. A quick observation shows that OpenTapioca makes more directly visible mistakes when compared to TextRazor. 
+
+\subsection{Overview}
+
+All results of our tests can be found in table \ref{tab:results}. When comparing the models using their precision and recall values, we can accept that TextRazor outperforms OpenTapioca. When we look at the generated annotations by both TextRazor and OpenTapioca, we can see that they behave very differently from each other. For example, we can see that TextRazor is eager to also link numbers used to describe amounts of money. Although this does not have to be marked wrong, it shows that the linking goes beyond the classical tagging of named entities.
 
 \begin{table}[h]
 	\centering
+	\begin{tabular}{llll}
+	\textbf{Corpus}	& \textbf{Model} & \textbf{Precision} & \textbf{Recall} \\ \hline
+	\citet{mcgee_2020}	& TextRazor & 0.7273 & 1.0  \\
+	\citet{mcgee_2020}	& OpenTapioca & 0.2857 &  0.5714 \\
+	\citet{mckeever_2020}	& TextRazor & 0.75 & 0.5714    \\
+	\citet{mckeever_2020}	& OpenTapioca & 0.1765 & 0.375  \\
+	\end{tabular}
+	\caption{Test results for TextRazor and OpenTapioca when applied to the \citet{mcgee_2020} and \citet{mckeever_2020} samples.}
+	\label{tab:results}
+\end{table}
+
+The performances of OpenTapioca are disappointing when compared to TextRazor. The system sometimes looks confused when tagging named entities. OpenTapioca also seems to be too eager when tagging certain words, such as \textit{Ahead} or \textit{can}. The cause for this phenomenon can be found in that these words could possibly be synonyms for \textit{real} entities; \textit{can} appears to lead to the entity Canada according to OpenTapioca. The system extensively uses Wikidata for the entity linking, hence why the tagging is rather \textit{aggressive} and strange when compared to TextRazor.
+
+\bibliographystyle{plainnat}
+\bibliography{refs.bib}
+
+\newpage
+
+\appendix
+
+\section{Results of TextRazor}
+
+\begin{table}[h!]
+	\centering
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{lllll}
-	\textbf{Entity}	& \textbf{Observed entity?} & \textbf{Real entity?} & \textbf{Normalized entity} \\ \hline
-		London	& Yes & Yes & London \\
-		Brussels	& Yes & Yes & Brussels \\
-		UK & Yes & Yes & United Kingdom\\
-		the European Union & Yes & Yes & European Union\\
-		the British Government & Yes & Yes & Government of the United Kingdom\\
-		international treaty & Yes & No & Treaty\\
-		Withdrawal agreement & Yes & No & Brexit withdrawal agreement\\
-		the UK to leave the EU & Yes & No & Brexit\\
-		January & Yes & Yes & 2021-01-01T00:00:00.000+00:00\\
-		government minister & Yes & Yes & Minister (government)\\
-		House of Commons & Yes & Yes & House of Commons
-	\end{tabular}%
+			\textbf{Entity}	& \textbf{Observed entity?} & \textbf{Real entity?} & \textbf{Normalized entity} \\ \hline
+			London	& Yes & Yes & London \\
+			Brussels	& Yes & Yes & Brussels \\
+			UK & Yes & Yes & United Kingdom\\
+			the European Union & Yes & Yes & European Union\\
+			the British Government & Yes & Yes & Government of the United Kingdom\\
+			international treaty & Yes & No & Treaty\\
+			Withdrawal agreement & Yes & No & Brexit withdrawal agreement\\
+			the UK to leave the EU & Yes & No & Brexit\\
+			January & Yes & Yes & 2021-01-01T00:00:00.000+00:00\\
+			government minister & Yes & Yes & Minister (government)\\
+			House of Commons & Yes & Yes & House of Commons
+		\end{tabular}%
 	}
-\caption{Performance report of TextRazor analyzing the \citet{mcgee_2020} sample.}
-\label{table:doc1_tr}
+	\caption{Performance report of TextRazor analyzing the \citet{mcgee_2020} sample.}
+	\label{table:rep_doc1_tr}
 \end{table}
 
 \begin{table}[h!]
@@ -119,34 +177,7 @@ We can see that - next to annotating the corpus - TextRazor splits its output pe
 		\end{tabular}%
 	}
 	\caption{Performance report of TextRazor analyzing the \citet{mckeever_2020} sample.}
-	\label{table:doc1_tr}
+	\label{table:rep_doc2_tr}
 \end{table}
-
-We can use the results from table \ref{table:doc1_tr} to calculate precision and recall.
-
-precision: 0.7273
-
-recall: 1
-
-
-\subsection{OpenTapioca}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{llll}
-	\textbf{Corpus}	& \textbf{Model} & \textbf{Precision} & \textbf{Recall} \\ \hline
-	\citet{mcgee_2020}	& TextRazor & 0.7273 & 1.0  \\
-	\citet{mcgee_2020}	& OpenTapioca &  &   \\
-	\citet{mckeever_2020}	& TextRazor &  &   \\
-	\citet{mckeever_2020}	& OpenTapioca &  &   \\
-	\end{tabular}
-	\caption{Test results for TextRazor and OpenTapioca for the corpora}
-	\label{tab:doc1_tr}
-\end{table}
-
-asdsad
-
-\bibliographystyle{plainnat}
-\bibliography{refs.bib}
 
 \end{document}
